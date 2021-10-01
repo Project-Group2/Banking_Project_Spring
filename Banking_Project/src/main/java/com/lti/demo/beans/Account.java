@@ -32,7 +32,7 @@ public class Account {
 	@Column (name = "NET_BANKING")
 	private String ifNetBanking;
 	
-	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "USER_ID")
 	private NetBankingAccount netbankingAccount;
 	

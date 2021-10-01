@@ -40,8 +40,8 @@ public class Transaction {
 	@Column(name="FROM_ACCOUNT")
 	private long fromAccount;
 	
-	@Column(name="BENEFICIARY_ACC_NO")
-	private long beneficiaryAcNo;
+	//@Column(name="BENEFICIARY_ACC_NO")
+	//private long beneficiaryAcNo;
     
 	@Column(name = "TRANSACTION_AMOUNT")
 	private double transactionAmount;
@@ -57,6 +57,10 @@ public class Transaction {
 	private Account account;
 	
 
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "BENEFICIARY_ACC_NO")
+	private Beneficiary beneficiary;
+	
 	public Transaction(int transactionId, String transactionDate, String transactionType, long fromAccount,
 			long beneficiaryAcNo, double transactionAmount, String status, String remarks) {
 		super();
@@ -64,7 +68,6 @@ public class Transaction {
 		this.transactionDate = transactionDate;
 		this.transactionType = transactionType;
 		this.fromAccount = fromAccount;
-		this.beneficiaryAcNo = beneficiaryAcNo;
 		this.transactionAmount = transactionAmount;
 		this.status = status;
 		this.remarks = remarks;
@@ -88,6 +91,20 @@ public class Transaction {
 		super();
 		this.transactionPass = transactionPass;
 	}
+	
+	
+
+
+
+	public Beneficiary getBeneficiary() {
+		return beneficiary;
+	}
+
+
+
+	public void setBeneficiary(Beneficiary beneficiary) {
+		this.beneficiary = beneficiary;
+	}
 
 
 
@@ -95,7 +112,7 @@ public class Transaction {
 	public String toString() {
 		return "Transaction [transactionId=" + transactionId + ", transactionDate=" + transactionDate
 				+ ", transactionType=" + transactionType + ", transactionPass=" + transactionPass + ", fromAccount="
-				+ fromAccount + ", beneficiaryAcNo=" + beneficiaryAcNo + ", transactionAmount=" + transactionAmount
+				+ fromAccount + ", transactionAmount=" + transactionAmount
 				+ ", status=" + status + ", remarks=" + remarks + "]";
 	}
 
@@ -134,13 +151,6 @@ public class Transaction {
 		this.fromAccount = fromAccount;
 	}
 
-	public long getBeneficiaryAcNo() {
-		return beneficiaryAcNo;
-	}
-
-	public void setBeneficiaryAcNo(long beneficiaryAcNo) {
-		this.beneficiaryAcNo = beneficiaryAcNo;
-	}
 
 	public double getTransactionAmount() {
 		return transactionAmount;

@@ -46,5 +46,24 @@ public class TransactionController {
 		
 	}
 	
+	@RequestMapping(value = "/transactionWithBeneficiary/{beneficiaryAcNo}")
+	@PostMapping
+	public Transaction transactionWithBeneficiary(@PathVariable("beneficiaryAcNo")Long beneficiaryAcNo, @RequestBody Transaction transaction) {
+		return transactionServiceCustom.transactionWithBeneficiary(beneficiaryAcNo, transaction);
+	}
+	
+	//localhost:8282/transaction/accountNoFromUserId/2
+	@RequestMapping(value ="/accountNoFromUserId/{userId}")
+	@GetMapping
+	public Long getAccountNobyUserId(@PathVariable("userId") Long netbankingUserId) {
+		return  transactionServiceCustom.getAccountNobyUserId(netbankingUserId);
+	}
+	
+	@RequestMapping(value ="/getTransactionPass/{userId}")
+	@GetMapping
+	public String getTransactionPassword(@PathVariable("userId") Long netbankingUserId) {
+		return transactionServiceCustom.getTransactionPassword(netbankingUserId);
+	}
+	
 
 }

@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.demo.beans.Account;
 import com.lti.demo.beans.Transaction;
+import com.lti.demo.dao.CreateAccountDao;
 import com.lti.demo.dao.TransactionDao;
+
 
 @Service
 public class TransactionService {
@@ -24,12 +27,6 @@ public class TransactionService {
 	}
 	
 	
-	
-//	public String neftTransaction(Transaction transaction)  {
-//		
-//				
-//		return null;
-//		
-//	}
+
 
 }

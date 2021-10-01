@@ -1,14 +1,10 @@
 package com.lti.bankingProject.beans;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,9 +25,6 @@ public class NetBankingAccount {
 	@Column (name = "SERVICE_NUMBER")
 	private long serviceNumber;
 	
-	@JoinColumn (name = "ACCOUNT_NUMBER")
-	@OneToOne (mappedBy = "netbankingAccount", cascade = CascadeType.ALL)
-	private Account account;
 	
 //	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "SERVICE_REF_ID")
@@ -41,11 +34,20 @@ public class NetBankingAccount {
 		super();
 	}
 
-	public NetBankingAccount(String loginPassword, String transactionPassword, long serviceNumber) {
+	public NetBankingAccount(Long userId, String loginPassword, String transactionPassword, long serviceNumber) {
 		super();
+		this.userId = userId;
 		this.loginPassword = loginPassword;
 		this.transactionPassword = transactionPassword;
 		this.serviceNumber = serviceNumber;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getLoginPassword() {
@@ -72,18 +74,11 @@ public class NetBankingAccount {
 		this.serviceNumber = serviceNumber;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 
 	@Override
 	public String toString() {
 		return "NetBankingAccount [userId=" + userId + ", loginPassword=" + loginPassword + ", transactionPassword="
-				+ transactionPassword + ", serviceNumber=" + serviceNumber + ", account=" + account + "]";
+				+ transactionPassword + ", serviceNumber=" + serviceNumber + "]";
 	}
 	
 	

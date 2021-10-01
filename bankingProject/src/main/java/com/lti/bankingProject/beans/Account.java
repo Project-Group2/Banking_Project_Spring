@@ -48,10 +48,12 @@ public class Account {
 		super();
 	}
 	
-	//NetBanking is there
-	public Account(String accountType, double balance, String ifNetBanking, NetBankingAccount netbankingAccount,
-			long serviceNumber) {
+	
+	//NetBanking is there -- extract
+	public Account(long accountNumber, String accountType, double balance, String ifNetBanking,
+			NetBankingAccount netbankingAccount, long serviceNumber) {
 		super();
+		this.accountNumber = accountNumber;
 		this.accountType = accountType;
 		this.balance = balance;
 		this.ifNetBanking = ifNetBanking;
@@ -59,16 +61,17 @@ public class Account {
 		this.serviceNumber = serviceNumber;
 	}
 	
-	//NetBanking is not there
-	public Account(String accountType, double balance, String ifNetBanking, long serviceNumber) {
-		super();
-		this.accountType = accountType;
-		this.balance = balance;
-		this.ifNetBanking = ifNetBanking;
-		this.serviceNumber = serviceNumber;
+
+	public long getAccountNumber() {
+		return accountNumber;
 	}
 
-	
+
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+
 	public String getAccountType() {
 		return accountType;
 	}

@@ -1,0 +1,36 @@
+create sequence account_seq start with 5555 increment by 1
+
+create sequence netbanking_seq start with 5555 increment by 1
+
+select * from accounts
+
+select * from net_banking 
+
+truncate accounts
+
+truncate net_banking
+
+
+JSON scripts:
+
+{  
+    "accountType":"Savings",
+    "balance":79990,
+    "ifNetBanking": "YES",
+    "netbankingAccount":{
+        "loginPassword":"Harshu@13",
+        "transactionPassword":"shali@13",
+        "serviceNumber": 6666
+    },
+    "serviceNumber": 12
+
+}
+
+
+
+{
+        "loginPassword":"Harshu@13",
+        "transactionPassword":"shali@13",
+        "serviceNumber": 6666
+    }
+

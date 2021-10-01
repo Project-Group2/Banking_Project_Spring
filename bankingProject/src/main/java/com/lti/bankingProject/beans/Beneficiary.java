@@ -2,22 +2,35 @@ package com.lti.bankingProject.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
+//import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="benefiary_details")
+@Table(name="BENEFICIARY_DETAILS")
 public class Beneficiary {
 	
-	@Id
-	@Column(name = "beneficiary_acc_no")
+	@Id	
+	@Column(name = "BENEFICIARY_ACC_NO")
 	private long beneficiaryAcNo;
 	
-	@Column(name = "beneficiary_name")
+	@Column(name = "BENEFICIARY_NAME")
 	private String benefiaryName;
 
-	@Column(name = "nick_name")
+	@Column(name = "NICK_NAME")
 	private String nickName;
+
+	
+
+
+	@Override
+	public String toString() {
+		return "Beneficiary [beneficiaryAcNo=" + beneficiaryAcNo
+				+ ", benefiaryName=" + benefiaryName + ", nickName=" + nickName + "]";
+	}
+
 
 	public Beneficiary() {
 		super();

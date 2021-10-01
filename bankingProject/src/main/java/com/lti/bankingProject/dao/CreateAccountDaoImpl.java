@@ -14,22 +14,16 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 	
 	@PersistenceContext
 	private EntityManager em;
-
+	
 	@Transactional
 	@Override
-	public Account accountWithoutNetbanking(Account account) {
+	public Account addAccount(Account account) {
 		// TODO Auto-generated method stub
 		em.persist(account);
 		return account;
 	}
 
-	@Transactional
-	@Override
-	public Account accountWithNetbanking(Account account) {
-		// TODO Auto-generated method stub
-		em.persist(account);
-		return account;
-	}
+	
 
 	@Transactional
 	@Override
@@ -48,4 +42,21 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 		return tempAccount;
 		
 	}
+
+
+
+	@Override
+	@Transactional
+	public NetBankingAccount resestPassword(NetBankingAccount netbankingAccount) {
+		// TODO Auto-generated method stub
+		NetBankingAccount tempnetbankingAccount = em.find(NetBankingAccount.class, netbankingAccount.getUserId());
+		tempnetbankingAccount.setLoginPassword(netbankingAccount.getLoginPassword());
+		tempnetbankingAccount.setTransactionPassword(netbankingAccount.getTransactionPassword());	
+		em.merge(tempnetbankingAccount);
+		return tempnetbankingAccount;
+	}
+
+	
+	
+	
 }

@@ -5,8 +5,9 @@ import com.lti.bankingProject.beans.NetBankingAccount;
 
 public interface CreateAccountDao {
 	
-	public abstract Account accountWithoutNetbanking(Account account);
-	public abstract Account accountWithNetbanking(Account account);
+	public abstract Account addAccount(Account account);
 	public abstract Account registerNetbankingAccount(Long accountNumber, NetBankingAccount netbankingAccount);
+	public abstract NetBankingAccount resestPassword(NetBankingAccount netbankingAccount);
+
 	
 }

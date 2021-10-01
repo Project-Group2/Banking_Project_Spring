@@ -17,18 +17,12 @@ public class CreateAccountServiceImpl implements CreateAccountService{
 	NetBankingAccount netbankingAccountService= null;
 
 	@Override
-	public Account accountWithoutNetbanking(Account account) {
+	public Account addAccount(Account account) {
 		// TODO Auto-generated method stub
-		accountService = createAccountDao.accountWithoutNetbanking(account);
+		accountService = createAccountDao.addAccount(account);
 		return accountService;
 	}
-
-	@Override
-	public Account accountWithNetbanking(Account account) {
-		// TODO Auto-generated method stub
-		accountService = createAccountDao.accountWithNetbanking(account);
-		return accountService;
-	}
+	
 
 	@Override
 	public Account registerNetbankingAccount(Long accountNumber, NetBankingAccount netbankingAccount) {
@@ -36,6 +30,15 @@ public class CreateAccountServiceImpl implements CreateAccountService{
 		accountService = createAccountDao.registerNetbankingAccount(accountNumber, netbankingAccount);
 		return accountService;
 	}
+
+
+	@Override
+	public NetBankingAccount resestPassword(NetBankingAccount netbankingAccount) {
+		// TODO Auto-generated method stub
+		netbankingAccountService = createAccountDao.resestPassword(netbankingAccount);
+		return netbankingAccountService;
+	}
+	
 	
 
 }

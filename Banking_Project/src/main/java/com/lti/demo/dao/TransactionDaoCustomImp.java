@@ -1,5 +1,7 @@
 package com.lti.demo.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -73,7 +75,7 @@ public class TransactionDaoCustomImp implements TransactionDaoCustom {
 		return transactionPassword;
 		
 	}
-	
+
 	
 	
 

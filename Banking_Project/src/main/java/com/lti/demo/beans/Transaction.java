@@ -31,17 +31,14 @@ public class Transaction {
 	@Column(name ="TRANSACTION_DATE")
 	private String transactionDate;
 	
-	@Column(name= "TRANSACTION_TYPE")
-	private String transactionType;
-	
 	@Column(name="TRANSACTION_PASS")
 	private String transactionPass;
 	
 	@Column(name="FROM_ACCOUNT")
 	private long fromAccount;
 	
-	//@Column(name="BENEFICIARY_ACC_NO")
-	//private long beneficiaryAcNo;
+	@Column(name="TO_ACCOUNT")
+	private long toAccount;
     
 	@Column(name = "TRANSACTION_AMOUNT")
 	private double transactionAmount;
@@ -61,19 +58,42 @@ public class Transaction {
 	@JoinColumn(name = "BENEFICIARY_ACC_NO")
 	private Beneficiary beneficiary;
 	
-	public Transaction(int transactionId, String transactionDate, String transactionType, long fromAccount,
-			long beneficiaryAcNo, double transactionAmount, String status, String remarks) {
+
+	
+
+
+	public Transaction(int transactionId, String transactionDate, String transactionPass, long fromAccount,
+			long toAccount, double transactionAmount, String status, String remarks, Account account,
+			Beneficiary beneficiary) {
 		super();
 		this.transactionId = transactionId;
 		this.transactionDate = transactionDate;
-		this.transactionType = transactionType;
+		this.transactionPass = transactionPass;
 		this.fromAccount = fromAccount;
+		this.toAccount = toAccount;
 		this.transactionAmount = transactionAmount;
 		this.status = status;
 		this.remarks = remarks;
+		this.account = account;
+		this.beneficiary = beneficiary;
 	}
 	
-	
+		
+
+
+	public long getToAccount() {
+		return toAccount;
+	}
+
+
+
+
+	public void setToAccount(long toAccount) {
+		this.toAccount = toAccount;
+	}
+
+
+
 
 	public String getTransactionPass() {
 		return transactionPass;
@@ -94,26 +114,13 @@ public class Transaction {
 	
 	
 
-
-
 	public Beneficiary getBeneficiary() {
 		return beneficiary;
 	}
 
 
-
 	public void setBeneficiary(Beneficiary beneficiary) {
 		this.beneficiary = beneficiary;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Transaction [transactionId=" + transactionId + ", transactionDate=" + transactionDate
-				+ ", transactionType=" + transactionType + ", transactionPass=" + transactionPass + ", fromAccount="
-				+ fromAccount + ", transactionAmount=" + transactionAmount
-				+ ", status=" + status + ", remarks=" + remarks + "]";
 	}
 
 	public int getTransactionId() {
@@ -133,15 +140,6 @@ public class Transaction {
 		this.transactionDate = transactionDate;
 	}
 
-
-
-	public String getTransactionType() {
-		return transactionType;
-	}
-
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
 
 	public long getFromAccount() {
 		return fromAccount;
@@ -191,6 +189,18 @@ public class Transaction {
 	public Transaction() {
 		super();
 	}
-	
 
+
+
+
+	@Override
+	public String toString() {
+		return "Transaction [transactionId=" + transactionId + ", transactionDate=" + transactionDate
+				+ ", transactionPass=" + transactionPass + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount
+				+ ", transactionAmount=" + transactionAmount + ", status=" + status + ", remarks=" + remarks
+				+ ", account=" + account + ", beneficiary=" + beneficiary + "]";
+	}
+
+
+	
 }

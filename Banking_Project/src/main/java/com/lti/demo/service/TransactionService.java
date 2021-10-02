@@ -20,6 +20,7 @@ public class TransactionService {
 	
 	 public List<Transaction> getAllTransaction() {
          return this.transactionDao.findAll();
+        
      }
 	
 	public Transaction addTransaction(Transaction transaction)  {
@@ -27,6 +28,8 @@ public class TransactionService {
 	}
 	
 	
-
-
+	 public Transaction displayTransaction(Long accountNumber){
+		 return this.transactionDao.findByFromAccount(accountNumber);
+	 }
+	
 }

@@ -1,6 +1,7 @@
 package com.lti.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class CreateAccountController {
 	CreateAccountService createAccountService;
 	
 	
-	
+	@CrossOrigin("*")
 	@RequestMapping(value = "/accountWithoutNetbanking")
 	@PostMapping
     public Account accountWithoutNetbanking(@RequestBody Account account) {
@@ -28,7 +29,7 @@ public class CreateAccountController {
         return this.createAccountService.accountWithoutNetbanking(account);
     }
 	
-	
+	@CrossOrigin("*")
 	@RequestMapping(value = "/accountWithNetbanking")
 	@PostMapping
     public Account accountWitNetbanking(@RequestBody Account account) {
@@ -36,7 +37,7 @@ public class CreateAccountController {
 		return this.createAccountService.accountWithNetbanking(account);
     }
 	
-	
+	@CrossOrigin("*")
 	@RequestMapping(value = "/registerNetbankingAccount/{accountNo}")
 	@PostMapping
     public Account registerNetbankingAccount(@PathVariable("accountNo") Long accountNumber, @RequestBody NetBankingAccount netBankingAccount) {

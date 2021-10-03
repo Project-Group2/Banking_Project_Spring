@@ -99,6 +99,23 @@ public class CreateAccountServiceImpl implements CreateAccountService{
 		List<Transaction> transactionDateWise = createAccountDao.getDateWiseTransactionsFor(accountNumber, fromDate, toDate);
 		return transactionDateWise;
 	}
+
+
+	@Override
+	public NetBankingAccount loginUser(Long userId) {
+		// TODO Auto-generated method stub
+		NetBankingAccount result = createAccountDao.loginUser(userId);
+		System.out.println(result);
+		return result;
+	}
+
+
+	@Override
+	public Account getAccount(Long accountNumber) {
+		// TODO Auto-generated method stub
+		accountService = createAccountDao.getAccount(accountNumber);
+		return accountService;
+	}
 	
 	
 

@@ -56,16 +56,23 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 	public Account registerNetbankingAccount(Long accountNumber, NetBankingAccount netbankingAccount) {
 		// TODO Auto-generated method stub
 		Account tempAccount = em.find(Account.class, (long)accountNumber);
-		if(tempAccount.getNetbankingAccount() != null) {
-			System.out.println("NetBanking exists for this account");
+		if(tempAccount==null) {
+			return null;
 		}
 		else {
-			tempAccount.setNetbankingAccount(netbankingAccount);
-			tempAccount.setIfNetBanking("YES");
-			em.persist(netbankingAccount);
-			em.merge(tempAccount);
+			if(tempAccount.getNetbankingAccount() != null) {
+				System.out.println("NetBanking exists for this account");
+				return null;
+			}
+			else {
+				tempAccount.setNetbankingAccount(netbankingAccount);
+				tempAccount.getNetbankingAccount().setUserRegistration(tempAccount.getUserRegistration());
+				tempAccount.setIfNetBanking("YES");
+				em.persist(netbankingAccount);
+				em.merge(tempAccount);
+			}
+			return tempAccount;
 		}
-		return tempAccount;
 		
 	}
 
@@ -174,6 +181,31 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 		qry.setParameter("toDt",toDate);
 		List<Transaction> transactionsDateWise = (List) qry.getResultList();
 		return transactionsDateWise;
+	}
+
+
+
+	@Override
+	public NetBankingAccount loginUser(Long userId) {
+		// TODO Auto-generated method stub
+		NetBankingAccount tempnetBankingAccount = em.find(NetBankingAccount.class, userId);
+		if(tempnetBankingAccount!= null) {
+			return tempnetBankingAccount;
+		}
+		return null;
+			
+	}
+
+
+
+	@Override
+	public Account getAccount(Long accountNumber) {
+		// TODO Auto-generated method stub
+		Account tempAccount = em.find(Account.class, accountNumber);
+		if(tempAccount == null) {
+			return null;
+		}
+		return tempAccount;
 	}
 	
 	

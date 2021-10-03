@@ -19,6 +19,8 @@ public interface CreateAccountService {
 	public abstract UserRegistration getUserProfileById(Long userId);
 	public abstract UserRegistration rejectUserRegistration(Long serviceId);
 	public abstract UserRegistration updateUser(UserRegistration userUpdate);
+	public abstract NetBankingAccount loginUser(Long userId);
+	public abstract Account getAccount(Long accountNumber);
 
 
 }

@@ -19,6 +19,8 @@ public interface CreateAccountDao {
 	public abstract UserRegistration getUserProfileById(Long userId);
 	public abstract UserRegistration rejectUserRegistration(Long serviecId);
 	public abstract UserRegistration updateUser(UserRegistration userUpdate);
+	public abstract NetBankingAccount loginUser(Long userId);
+	public abstract Account getAccount(Long accountNumber);
 	
 	
 }

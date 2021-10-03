@@ -80,13 +80,7 @@ public class CreateAccountController {
 		return this.createAccountService.getAccountbyUserId(netbankingUserId);
 	}
 	
-	
-//	@RequestMapping (value="/getDateTransactions/{accountNo}/{fromDt}-{toDt}")
-//	@GetMapping
-//	public List<Transaction> getAllTransactionsFor(@PathVariable ("accountNo") Long accountNumber,
-//			("fromDt") String fromDate, ("toDt") String toDate){
-//		return this.createAccountService.getAllTransactionsFor(accountNumber);
-//	}
+
 	
 	
 	//recent transactions
@@ -128,10 +122,23 @@ public class CreateAccountController {
 	
 	@RequestMapping (value = "/getTransactions/{accountNo}/{fromDt}/{toDt}")
 	@GetMapping 
-    public List<Transaction> updateUser(@PathVariable ("accountNo") Long accountNumber, 
+    public List<Transaction> dateWiseTransaction(@PathVariable ("accountNo") Long accountNumber, 
     		@PathVariable ("fromDt") String fromDate, @PathVariable ("toDt") String toDate) {
 		System.out.println(accountNumber + fromDate + toDate);
 		return this.createAccountService.getDateWiseTransactionsFor(accountNumber, fromDate, toDate);
+    }
+	
+	@RequestMapping (value = "/checkLoginUser/{userid}")
+	@GetMapping 
+    public NetBankingAccount loginUser(@PathVariable ("userid") Long userId) {
+		return this.createAccountService.loginUser(userId);
+    }
+	
+	
+	@RequestMapping (value = "/getAccount/{accountNo}")
+	@GetMapping 
+    public Account getAccount(@PathVariable ("accountNo") Long accountNumber) {
+		return this.createAccountService.getAccount(accountNumber);
     }
         
 }

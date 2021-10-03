@@ -26,7 +26,7 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 	@Override
 	public Account addAccount(Long userRegistrationNumber, Account account) {
 		// TODO Auto-generated method stub
-		UserRegistration tempuserRegistration = em.find(UserRegistration.class, userRegistrationNumber);
+		UserRegistration tempuserRegistration = em.find(UserRegistration.class, userRegistrationNumber); // userRegistrationNumber is serviceid
 		if(tempuserRegistration != null) {
 			account.setUserRegistration(tempuserRegistration);
 			if(tempuserRegistration.getNet_banking().equalsIgnoreCase("YES")) {

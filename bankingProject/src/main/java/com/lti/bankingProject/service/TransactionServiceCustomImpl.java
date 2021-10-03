@@ -18,6 +18,23 @@ public class TransactionServiceCustomImpl implements TransactionServiceCustom{
 		return transactionDaoCustom.transactionWithAccount(accountNumber, transaction);
 	
 	}
+
+	@Override
+	public Transaction transactionWithBeneficiary(Long beneficiaryAcNo, Transaction transaction) {
+	
+		return transactionDaoCustom.transactionWithBeneficiary(beneficiaryAcNo, transaction);
+	}
+
+	@Override
+	public Long getAccountNobyUserId(Long netbankingUserId) {
+		return transactionDaoCustom.getAccountNobyUserId(netbankingUserId);
+	}
+
+	@Override
+	public String getTransactionPassword(Long netbankingUserId) {
+		return transactionDaoCustom.getTransactionPassword(netbankingUserId);
+		
+	}
 	
 
 }

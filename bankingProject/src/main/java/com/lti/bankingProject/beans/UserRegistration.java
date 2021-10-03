@@ -20,7 +20,7 @@ public class UserRegistration {
 	@SequenceGenerator(name="Userseq",sequenceName="Userseq",allocationSize = 1)
 
 	@Column(name="SERVICE_ID")
-	public int service_id;
+	public long service_id;
 	
 	@Column(name="ADHAR_CARD")
 	public long aadhar_card;
@@ -62,7 +62,6 @@ public class UserRegistration {
 	public String date_of_birth;
 	
 	
-	
 	@Column(name="ACCOUNT_STATUS")
 	public String account_status;
 	
@@ -74,9 +73,11 @@ public class UserRegistration {
 	public  Address address;
 
 	//getters adn setters
+	
 	public long getAadhar_card() {
 		return aadhar_card;
 	}
+
 
 	public void setAadhar_card(long aadhar_card) {
 		this.aadhar_card = aadhar_card;
@@ -110,7 +111,7 @@ public class UserRegistration {
 		return Phone_Number;
 	}
 
-	public void setPhone_Number(int phone_Number) {
+	public void setPhone_Number(long phone_Number) {
 		Phone_Number = phone_Number;
 	}
 
@@ -186,7 +187,7 @@ public class UserRegistration {
 	public void setAccount_status(String account_status) {
 		this.account_status = account_status;
 	}
-
+	
 	public String getNet_banking() {
 		return net_banking;
 	}
@@ -204,42 +205,16 @@ public class UserRegistration {
 	}
 	
 
-	public int getService_id() {
+	public long getService_id() {
 		return service_id;
 	}
 
-	public void setService_id(int service_id) {
+	public void setService_id(long service_id) {
 		this.service_id = service_id;
 	}
 	
 	
 	
-	
-	
-	
-	
-
-	public UserRegistration(long aadhar_card, String first_name, String middle_name, String last_name, long phone_Number,
-			String email_id, String father_name, String mother_name, String occupation, String source_of_income,
-			int annual_income, String account_type, String date_of_birth, String account_status,
-			String net_banking) {
-		super();
-		this.aadhar_card = aadhar_card;
-		First_name = first_name;
-		Middle_name = middle_name;
-		Last_name = last_name;
-		Phone_Number = phone_Number;
-		Email_id = email_id;
-		this.father_name = father_name;
-		this.mother_name = mother_name;
-		this.occupation = occupation;
-		this.source_of_income = source_of_income;
-		this.annual_income = annual_income;
-		this.account_type = account_type;
-		this.date_of_birth = date_of_birth;
-		this.account_status = account_status;
-		this.net_banking = net_banking;
-	}
 
 	public UserRegistration(long aadhar_card, String first_name, String middle_name, String last_name, long phone_Number,
 			String email_id, String father_name, String mother_name, String occupation, String source_of_income,
@@ -247,11 +222,11 @@ public class UserRegistration {
 			String net_banking, Address address) {
 		super();
 		this.aadhar_card = aadhar_card;
-		First_name = first_name;
-		Middle_name = middle_name;
-		Last_name = last_name;
-		Phone_Number = phone_Number;
-		Email_id = email_id;
+		this.First_name = first_name;
+		this.Middle_name = middle_name;
+		this.Last_name = last_name;
+		this.Phone_Number = phone_Number;
+		this.Email_id = email_id;
 		this.father_name = father_name;
 		this.mother_name = mother_name;
 		this.occupation = occupation;

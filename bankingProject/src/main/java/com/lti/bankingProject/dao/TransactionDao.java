@@ -8,9 +8,8 @@ import com.lti.bankingProject.beans.Transaction;
 
 public interface TransactionDao extends JpaRepository<Transaction, Long>{
 	
-	
-	//public String neftTransaction(Transaction transaction);
-	
+
+	public Transaction findByFromAccount(long accountNumber);
 	
 
 }

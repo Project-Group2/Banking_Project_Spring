@@ -34,3 +34,30 @@ JSON scripts:
         "serviceNumber": 6666
     }
 
+
+
+{
+    "aadhar_card": 888899993333,
+    "First_name": "Harsh",
+    "Middle_name": "hatsjkj",
+    "Last_name": "shali",
+    "Phone_Number": 1234567890,
+    "Email_id": "hxshaksj@mail.com",
+    "father_name": "Sunil",
+    "mother_name": "Usha" ,
+    "occupation": "Job",
+    "source_of_income": "Salary",
+    "annual_income": 567890,
+    "account_type": "Savings",
+    "date_of_birth": "dd-mm-yy" ,
+    "account_status": null,
+    "net_banking": "No",
+    "address" :  {
+        "city":"mumbai",
+        "state": "maha",
+        "country": "India",
+        "pincode": 400101
+
+    }
+
+}

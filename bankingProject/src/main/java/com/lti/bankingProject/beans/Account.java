@@ -36,30 +36,28 @@ public class Account {
 	@JoinColumn(name = "USER_ID")
 	private NetBankingAccount netbankingAccount;
 	
-	
-	@Column (name = "SERVICE_NUMBER")
-	private long serviceNumber;
-//	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "SERVICE_REF_ID")
-//	private UserDetail userdetail;
+
+	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "SERVICE_ID")
+	private UserRegistration userRegistration;
 
 
 	public Account() {
 		super();
 	}
 	
-	
 	//NetBanking is there -- extract
-	public Account(long accountNumber, String accountType, double balance, String ifNetBanking,
-			NetBankingAccount netbankingAccount, long serviceNumber) {
-		super();
-		this.accountNumber = accountNumber;
-		this.accountType = accountType;
-		this.balance = balance;
-		this.ifNetBanking = ifNetBanking;
-		this.netbankingAccount = netbankingAccount;
-		this.serviceNumber = serviceNumber;
-	}
+		public Account(long accountNumber, String accountType, double balance, String ifNetBanking,
+				NetBankingAccount netbankingAccount, UserRegistration userRegistration) {
+			super();
+			this.accountNumber = accountNumber;
+			this.accountType = accountType;
+			this.balance = balance;
+			this.ifNetBanking = ifNetBanking;
+			this.netbankingAccount = netbankingAccount;
+			this.userRegistration = userRegistration;
+		}
+	
 	
 
 	public long getAccountNumber() {
@@ -104,19 +102,21 @@ public class Account {
 		this.netbankingAccount = netbankingAccount;
 	}
 
-	public long getServiceNumber() {
-		return serviceNumber;
+	
+
+	public UserRegistration getUserRegistration() {
+		return userRegistration;
 	}
 
-	public void setServiceNumber(long serviceNumber) {
-		this.serviceNumber = serviceNumber;
+	public void setUserRegistration(UserRegistration userRegistration) {
+		this.userRegistration = userRegistration;
 	}
 
 	@Override
 	public String toString() {
 		return "Account [accountNumber=" + accountNumber + ", accountType=" + accountType + ", balance=" + balance
-				+ ", ifNetBanking=" + ifNetBanking + ", netbankingAccount=" + netbankingAccount + ", serviceNumber="
-				+ serviceNumber + "]";
+				+ ", ifNetBanking=" + ifNetBanking + ", netbankingAccount=" + netbankingAccount + ", userRegistration="
+				+ userRegistration + "]";
 	}
 	
 	

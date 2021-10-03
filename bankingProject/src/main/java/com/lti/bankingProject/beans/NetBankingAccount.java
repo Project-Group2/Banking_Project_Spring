@@ -1,10 +1,14 @@
 package com.lti.bankingProject.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,25 +26,28 @@ public class NetBankingAccount {
 	private String loginPassword;
 	@Column (name = "TRANSACTION_PASSWORD")
 	private String transactionPassword;
-	@Column (name = "SERVICE_NUMBER")
-	private long serviceNumber;
 	
 	
-//	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "SERVICE_REF_ID")
-//	private UserDetail userdetail;
+	@OneToOne (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "SERVICE_ID")
+	private UserRegistration userRegistration;
 	
 	public NetBankingAccount() {
 		super();
 	}
 
-	public NetBankingAccount(Long userId, String loginPassword, String transactionPassword, long serviceNumber) {
+	
+
+	public NetBankingAccount(long userId, String loginPassword, String transactionPassword,
+			UserRegistration userRegistration) {
 		super();
 		this.userId = userId;
 		this.loginPassword = loginPassword;
 		this.transactionPassword = transactionPassword;
-		this.serviceNumber = serviceNumber;
+		this.userRegistration = userRegistration;
 	}
+
+
 
 	public long getUserId() {
 		return userId;
@@ -66,19 +73,20 @@ public class NetBankingAccount {
 		this.transactionPassword = transactionPassword;
 	}
 
-	public long getServiceNumber() {
-		return serviceNumber;
+
+	public UserRegistration getUserRegistration() {
+		return userRegistration;
 	}
 
-	public void setServiceNumber(long serviceNumber) {
-		this.serviceNumber = serviceNumber;
+	public void setUserRegistration(UserRegistration userRegistration) {
+		this.userRegistration = userRegistration;
 	}
 
 
 	@Override
 	public String toString() {
 		return "NetBankingAccount [userId=" + userId + ", loginPassword=" + loginPassword + ", transactionPassword="
-				+ transactionPassword + ", serviceNumber=" + serviceNumber + "]";
+				+ transactionPassword + ", userRegistration=" + userRegistration + "]";
 	}
 	
 	

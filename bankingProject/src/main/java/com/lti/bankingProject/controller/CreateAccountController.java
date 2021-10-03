@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.bankingProject.beans.Account;
 import com.lti.bankingProject.beans.NetBankingAccount;
+import com.lti.bankingProject.beans.Transaction;
+import com.lti.bankingProject.beans.UserRegistration;
 import com.lti.bankingProject.service.CreateAccountJpaService;
 import com.lti.bankingProject.service.CreateAccountService;
 
-@CrossOrigin (origins="*")
+@CrossOrigin (origins="http://localhost:4200", allowedHeaders = "Access-Control-Allow-Origin")
 @RestController
 @RequestMapping("/account")
 public class CreateAccountController {
@@ -30,10 +32,10 @@ public class CreateAccountController {
 	
 	
 	//http://localhost:8282/account/addAccount
-	@RequestMapping(value = "/addAccount")
+	@RequestMapping(value = "/addAccount/{userRegisterId}")
 	@PostMapping
-    public Account accountWithoutNetbanking(@RequestBody Account account) {
-        return this.createAccountService.addAccount(account);
+    public Account accountWithoutNetbanking(@PathVariable("userRegisterId") Long userRegistrationNumber,@RequestBody Account account) {
+        return this.createAccountService.addAccount(userRegistrationNumber, account);
     }
 	
 	
@@ -71,5 +73,65 @@ public class CreateAccountController {
     }
 	
 	
+	
+	@RequestMapping (value="/getAccountById/{netbankingUserId}")
+	@GetMapping
+	public Account getAccountbyUserId(@PathVariable("netbankingUserId") Long netbankingUserId) {
+		return this.createAccountService.getAccountbyUserId(netbankingUserId);
+	}
+	
+	
+//	@RequestMapping (value="/getDateTransactions/{accountNo}/{fromDt}-{toDt}")
+//	@GetMapping
+//	public List<Transaction> getAllTransactionsFor(@PathVariable ("accountNo") Long accountNumber,
+//			("fromDt") String fromDate, ("toDt") String toDate){
+//		return this.createAccountService.getAllTransactionsFor(accountNumber);
+//	}
+	
+	
+	//recent transactions
+	@RequestMapping (value="/getRecentTransactions/{accountNo}")
+	@GetMapping
+	public List<Transaction> get5TransactionsFor(@PathVariable ("accountNo") Long accountNumber){
+		return this.createAccountService.get5TransactionsFor(accountNumber);
+	}
+	
+	//pending users
+	@RequestMapping (value="/getPendingRegisters")
+	@GetMapping
+	public List<UserRegistration> getPendingRegisters(){
+		return this.createAccountService.getPendingRegisters();
+	}
+		
+	
+	@RequestMapping (value="/userprofile/{userid}")
+	@GetMapping
+	public UserRegistration getUserProfileById(@PathVariable ("userid") Long userId){
+		return this.createAccountService.getUserProfileById(userId);				
+	}
+	
+	
+	@RequestMapping (value="/rejectUser/{serviceid}")
+	@GetMapping
+	public UserRegistration rejectUserRegistration(@PathVariable ("serviceid") Long serviceId) {
+		return this.createAccountService.rejectUserRegistration(serviceId);
+	}
+
+	
+	
+	@RequestMapping (value = "/updateProfile")
+	@PutMapping 
+    public UserRegistration updateUser(@RequestBody UserRegistration userUpdate) {
+		System.out.println(userUpdate);
+		return this.createAccountService.updateUser(userUpdate);
+    }
+	
+	@RequestMapping (value = "/getTransactions/{accountNo}/{fromDt}/{toDt}")
+	@GetMapping 
+    public List<Transaction> updateUser(@PathVariable ("accountNo") Long accountNumber, 
+    		@PathVariable ("fromDt") String fromDate, @PathVariable ("toDt") String toDate) {
+		System.out.println(accountNumber + fromDate + toDate);
+		return this.createAccountService.getDateWiseTransactionsFor(accountNumber, fromDate, toDate);
+    }
         
 }

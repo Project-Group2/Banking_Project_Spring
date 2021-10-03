@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.bankingProject.beans.Account;
 import com.lti.bankingProject.beans.Transaction;
+import com.lti.bankingProject.dao.CreateAccountDao;
 import com.lti.bankingProject.dao.TransactionDao;
+
 
 @Service
 public class TransactionService {
@@ -17,6 +20,7 @@ public class TransactionService {
 	
 	 public List<Transaction> getAllTransaction() {
          return this.transactionDao.findAll();
+        
      }
 	
 	public Transaction addTransaction(Transaction transaction)  {
@@ -24,12 +28,8 @@ public class TransactionService {
 	}
 	
 	
+	 public Transaction displayTransaction(Long accountNumber){
+		 return this.transactionDao.findByFromAccount(accountNumber);
+	 }
 	
-//	public String neftTransaction(Transaction transaction)  {
-//		
-//				
-//		return null;
-//		
-//	}
-
 }

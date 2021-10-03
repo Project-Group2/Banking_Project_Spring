@@ -76,7 +76,27 @@ public class TransactionDaoCustomImp implements TransactionDaoCustom {
 		
 	}
 
-	
-	
+
+	@Override
+	@Transactional
+	public Double updateBalance(Long accountNumber) {
+		Query query = em.createQuery("Select t from Transaction t where t.fromAccount=:accNo");
+		Query query1 = em.createQuery("Select a from Account a where a.accountNumber=:accNo");
+		query.setParameter("accNo",accountNumber);
+		query1.setParameter("accNo",accountNumber);
+		Transaction tempTrans = (Transaction) query.getSingleResult();
+		Account tempAccount = (Account) query1.getSingleResult();
+		Double balance = tempAccount.getBalance();
+		System.out.println(balance);
+		Double transAmount = tempTrans.getTransactionAmount();
+		System.out.println(transAmount);
+		Double updatedBalance = balance-transAmount;
+		System.out.println(updatedBalance);
+		tempAccount.setBalance(updatedBalance);
+		tempTrans.setStatus("Successfull");
+		Double finalBalance =tempAccount.getBalance();
+		System.out.println(finalBalance);
+		return finalBalance;
+	}
 
 }

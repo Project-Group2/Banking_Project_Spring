@@ -35,6 +35,11 @@ public class TransactionServiceCustomImp implements TransactionServiceCustom{
 		return transactionDaoCustom.getTransactionPassword(netbankingUserId);
 		
 	}
+
+	@Override
+	public Double updateBalance(Long accountNumber) {
+	   return transactionDaoCustom.updateBalance(accountNumber);
+	}
 	
 
 }

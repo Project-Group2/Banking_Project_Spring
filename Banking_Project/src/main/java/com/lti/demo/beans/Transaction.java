@@ -46,6 +46,9 @@ public class Transaction {
 	@Column(name="TRANSACTION_STATUS")
 	private String status;
 	
+	@Column(name="TRANSACTION_TYPE")
+	private String transactionType;
+	
 	@Column(name="TR_REMARKS")
 	private String remarks;
 	
@@ -57,14 +60,11 @@ public class Transaction {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "BENEFICIARY_ACC_NO")
 	private Beneficiary beneficiary;
-	
-
-	
 
 
 	public Transaction(int transactionId, String transactionDate, String transactionPass, long fromAccount,
-			long toAccount, double transactionAmount, String status, String remarks, Account account,
-			Beneficiary beneficiary) {
+			long toAccount, double transactionAmount, String status, String transactionType, String remarks,
+			Account account, Beneficiary beneficiary) {
 		super();
 		this.transactionId = transactionId;
 		this.transactionDate = transactionDate;
@@ -73,26 +73,38 @@ public class Transaction {
 		this.toAccount = toAccount;
 		this.transactionAmount = transactionAmount;
 		this.status = status;
+		this.transactionType = transactionType;
 		this.remarks = remarks;
 		this.account = account;
 		this.beneficiary = beneficiary;
 	}
+
 	
-		
 
-
-	public long getToAccount() {
-		return toAccount;
+	public Transaction() {
+		super();
 	}
 
 
 
-
-	public void setToAccount(long toAccount) {
-		this.toAccount = toAccount;
+	public int getTransactionId() {
+		return transactionId;
 	}
 
 
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
+
+
+	public String getTransactionDate() {
+		return transactionDate;
+	}
+
+
+	public void setTransactionDate(String transactionDate) {
+		this.transactionDate = transactionDate;
+	}
 
 
 	public String getTransactionPass() {
@@ -100,19 +112,80 @@ public class Transaction {
 	}
 
 
-
 	public void setTransactionPass(String transactionPass) {
 		this.transactionPass = transactionPass;
 	}
 
 
-
-	public Transaction(String transactionPass) {
-		super();
-		this.transactionPass = transactionPass;
+	public long getFromAccount() {
+		return fromAccount;
 	}
-	
-	
+
+
+	public void setFromAccount(long fromAccount) {
+		this.fromAccount = fromAccount;
+	}
+
+
+	public long getToAccount() {
+		return toAccount;
+	}
+
+
+	public void setToAccount(long toAccount) {
+		this.toAccount = toAccount;
+	}
+
+
+	public double getTransactionAmount() {
+		return transactionAmount;
+	}
+
+
+	public void setTransactionAmount(double transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+
+	public Account getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 
 	public Beneficiary getBeneficiary() {
 		return beneficiary;
@@ -123,84 +196,17 @@ public class Transaction {
 		this.beneficiary = beneficiary;
 	}
 
-	public int getTransactionId() {
-		return transactionId;
-	}
-
-	public void setTransactionId(int transactionId) {
-		this.transactionId = transactionId;
-	}
-
-	public String  getTransactionDate() {
-		return transactionDate;
-	}
-
-
-	public void setTransactionDate(String transactionDate) {
-		this.transactionDate = transactionDate;
-	}
-
-
-	public long getFromAccount() {
-		return fromAccount;
-	}
-
-	public void setFromAccount(long fromAccount) {
-		this.fromAccount = fromAccount;
-	}
-
-
-	public double getTransactionAmount() {
-		return transactionAmount;
-	}
-
-	public void setTransactionAmount(double transactionAmount) {
-		this.transactionAmount = transactionAmount;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-
-
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public Transaction() {
-		super();
-	}
-
-
-
 
 	@Override
 	public String toString() {
 		return "Transaction [transactionId=" + transactionId + ", transactionDate=" + transactionDate
 				+ ", transactionPass=" + transactionPass + ", fromAccount=" + fromAccount + ", toAccount=" + toAccount
-				+ ", transactionAmount=" + transactionAmount + ", status=" + status + ", remarks=" + remarks
-				+ ", account=" + account + ", beneficiary=" + beneficiary + "]";
+				+ ", transactionAmount=" + transactionAmount + ", status=" + status + ", transactionType="
+				+ transactionType + ", remarks=" + remarks + ", account=" + account + ", beneficiary=" + beneficiary
+				+ "]";
 	}
-
-
 	
+	
+	
+
 }

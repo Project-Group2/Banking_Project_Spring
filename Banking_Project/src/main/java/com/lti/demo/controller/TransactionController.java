@@ -79,4 +79,12 @@ public class TransactionController {
 	public Transaction displayTransaction(@PathVariable("fromAccount") long accountNumber) {
 		return transactionService.displayTransaction(accountNumber);
 	}
+	
+	@CrossOrigin("*")
+	@RequestMapping(value ="/updateBalance/{fromAccount}")
+	@GetMapping
+	public Double updateBalance(@PathVariable("fromAccount")Long accountNumber) {
+		return transactionServiceCustom.updateBalance(accountNumber);
+	}
+	
 }

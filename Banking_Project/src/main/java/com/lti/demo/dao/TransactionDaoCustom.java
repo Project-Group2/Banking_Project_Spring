@@ -14,5 +14,5 @@ public interface TransactionDaoCustom {
 	
 	public abstract String getTransactionPassword(Long netbankingUserId);
 	
-	
+	public  abstract Double updateBalance(Long accountNumber);
 }

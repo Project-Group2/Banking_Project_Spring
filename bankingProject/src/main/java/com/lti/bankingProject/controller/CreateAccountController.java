@@ -3,6 +3,7 @@ package com.lti.bankingProject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.lti.bankingProject.beans.Transaction;
 import com.lti.bankingProject.beans.UserRegistration;
 import com.lti.bankingProject.service.CreateAccountJpaService;
 import com.lti.bankingProject.service.CreateAccountService;
+import com.lti.bankingProject.service.MailService;
 
 @CrossOrigin (origins="http://localhost:4200", allowedHeaders = "Access-Control-Allow-Origin")
 @RestController
@@ -30,12 +32,18 @@ public class CreateAccountController {
 	@Autowired
 	CreateAccountJpaService createAccountJpaService;
 	
+	@Autowired
+	MailService mailService;
+	
+	
 	
 	//http://localhost:8282/account/addAccount
 	@RequestMapping(value = "/addAccount/{userRegisterId}")
 	@PostMapping
     public Account accountWithoutNetbanking(@PathVariable("userRegisterId") Long userRegistrationNumber,@RequestBody Account account) {
-        return this.createAccountService.addAccount(userRegistrationNumber, account);
+        Account tempAccount = createAccountService.addAccount(userRegistrationNumber, account);
+        this.mailService.userAccepted(tempAccount);
+		return tempAccount;
     }
 	
 	
@@ -108,7 +116,9 @@ public class CreateAccountController {
 	@RequestMapping (value="/rejectUser/{serviceid}")
 	@GetMapping
 	public UserRegistration rejectUserRegistration(@PathVariable ("serviceid") Long serviceId) {
-		return this.createAccountService.rejectUserRegistration(serviceId);
+		UserRegistration tempUser = createAccountService.rejectUserRegistration(serviceId);
+		this.mailService.UserRejected(tempUser);
+		return tempUser;
 	}
 
 	
@@ -140,5 +150,16 @@ public class CreateAccountController {
     public Account getAccount(@PathVariable ("accountNo") Long accountNumber) {
 		return this.createAccountService.getAccount(accountNumber);
     }
+	
+	
+	@RequestMapping (value = "/userregister/adduser")
+	@GetMapping 
+    public UserRegistration createUser(@RequestBody UserRegistration user) {
+		UserRegistration tempuser = createAccountService.createUser(user);
+		this.mailService.UserInserted(tempuser);
+		return tempuser;
+    }
+	
+	
         
 }

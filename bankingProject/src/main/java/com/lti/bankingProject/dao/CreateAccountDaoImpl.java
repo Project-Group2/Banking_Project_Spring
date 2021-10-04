@@ -120,7 +120,7 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 	@Override
 	public List<UserRegistration> getPendingRegisters() {
 		// TODO Auto-generated method stub
-		Query qry = em.createQuery("Select u from UserRegistration u where u.account_status='pending'");
+		Query qry = em.createQuery("Select u from UserRegistration u where u.account_status='Pending'");
 		List pendingUsers = (List) qry.getResultList();
 		return pendingUsers;
 	}
@@ -206,6 +206,23 @@ public class CreateAccountDaoImpl implements CreateAccountDao{
 			return null;
 		}
 		return tempAccount;
+	}
+
+
+
+	@Override
+	@Transactional
+	public UserRegistration createUser(UserRegistration user) {
+		// TODO Auto-generated method stub
+		System.out.println(user);
+		Query qry = em.createQuery("Select u from UserRegistration u where u.aadhar_card=:aadhar and u.account_status='Accepted'");
+		qry.setParameter("aadhar",user.getAadhar_card());
+		List<UserRegistration> existingUser = (List) qry.getResultList();
+		if(existingUser.isEmpty()) {
+			em.persist(user);
+			return user;
+		}
+		return null;
 	}
 	
 	

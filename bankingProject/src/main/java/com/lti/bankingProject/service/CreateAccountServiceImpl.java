@@ -2,7 +2,9 @@ package com.lti.bankingProject.service;
 
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.lti.bankingProject.beans.Account;
@@ -16,6 +18,8 @@ public class CreateAccountServiceImpl implements CreateAccountService{
 	
 	@Autowired
 	private CreateAccountDao createAccountDao;
+	
+	
 	
 	Account accountService = null;
 	NetBankingAccount netbankingAccountService= null;
@@ -115,6 +119,14 @@ public class CreateAccountServiceImpl implements CreateAccountService{
 		// TODO Auto-generated method stub
 		accountService = createAccountDao.getAccount(accountNumber);
 		return accountService;
+	}
+
+
+	@Override
+	public UserRegistration createUser(UserRegistration user) {
+		// TODO Auto-generated method stub
+		UserRegistration serviceUser  =createAccountDao.createUser(user);
+		return serviceUser;
 	}
 	
 	

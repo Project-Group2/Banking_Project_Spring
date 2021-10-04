@@ -83,7 +83,7 @@ public class TransactionController {
 	@CrossOrigin("*")
 	@RequestMapping(value ="/updateBalance/{fromAccount}")
 	@GetMapping
-	public Double updateBalance(@PathVariable("fromAccount")Long accountNumber) {
+	public String updateBalance(@PathVariable("fromAccount")Long accountNumber) {
 		return transactionServiceCustom.updateBalance(accountNumber);
 	}
 	

@@ -3,9 +3,11 @@ package com.lti.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.lti.demo.beans.Account;
 import com.lti.demo.beans.Transaction;
 import com.lti.demo.dao.TransactionDaoCustom;
+import com.lti.demo.exception.HrException;
 
 @Service("transactionServiceCustom")
 public class TransactionServiceCustomImp implements TransactionServiceCustom{
@@ -37,9 +39,16 @@ public class TransactionServiceCustomImp implements TransactionServiceCustom{
 	}
 
 	@Override
-	public Double updateBalance(Long accountNumber) {
+	public String updateBalance(Long accountNumber)  {
+		String message;
+		try {
 	   return transactionDaoCustom.updateBalance(accountNumber);
 	}
+		 catch (HrException e) {
+				// TODO Auto-generated catch block
+				 message="Insufficient Balance or Transaction Amount is greater than balance";
+			}
 	
-
+return message;
+	}
 }

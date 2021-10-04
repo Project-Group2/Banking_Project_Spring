@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lti.demo.beans.Account;
 import com.lti.demo.beans.Transaction;
+import com.lti.demo.exception.HrException;
 
 public interface TransactionDaoCustom {
 	public abstract Transaction transactionWithAccount(Long accountNumber, Transaction transaction);
@@ -14,5 +15,5 @@ public interface TransactionDaoCustom {
 	
 	public abstract String getTransactionPassword(Long netbankingUserId);
 	
-	public  abstract Double updateBalance(Long accountNumber);
+	public  abstract String updateBalance(Long accountNumber)throws HrException;
 }

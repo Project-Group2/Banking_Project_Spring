@@ -13,57 +13,53 @@ import com.lti.demo.beans.Account;
 import com.lti.demo.beans.Beneficiary;
 import com.lti.demo.beans.Transaction;
 import com.lti.demo.beans.NetBankingAccount;
+import com.lti.demo.exception.HrException;
 
 @Repository
 public class TransactionDaoCustomImp implements TransactionDaoCustom {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	
+
 	@Override
 	@Transactional
 	public Transaction transactionWithAccount(Long accountNumber, Transaction transaction) {
-		Account tempAccount = em.find(Account.class, (long)accountNumber);
-		if(tempAccount != null) {
-		transaction.setAccount(tempAccount);
-		em.persist(transaction);
-		}
-		else {
+		Account tempAccount = em.find(Account.class, (long) accountNumber);
+		if (tempAccount != null) {
+			transaction.setAccount(tempAccount);
+			em.persist(transaction);
+		} else {
 			System.out.println("Account does not exist");
 		}
 		return transaction;
-		
-	}
 
+	}
 
 	@Override
 	@Transactional
 	public Transaction transactionWithBeneficiary(Long beneficiaryAcNo, Transaction transaction) {
 		Beneficiary tempBeneficiary = em.find(Beneficiary.class, beneficiaryAcNo);
-		if(tempBeneficiary !=null) {
+		if (tempBeneficiary != null) {
 			transaction.setBeneficiary(tempBeneficiary);
-			em.persist(transaction);;
-		}
-		else {
+			em.persist(transaction);
+			;
+		} else {
 			System.out.println("Beneficiary does not exist");
 		}
 		return transaction;
-		
-	}
 
+	}
 
 	@Transactional
 	@Override
 	public Long getAccountNobyUserId(Long netbankingUserId) {
-		
+
 		Query qry = em.createQuery("Select a from Account a JOIN a.netbankingAccount nb where nb.userId=:userid");
 		qry.setParameter("userid", netbankingUserId);
 		Account tempAccount = (Account) qry.getSingleResult();
 		Long acountNumber = tempAccount.getAccountNumber();
 		return acountNumber;
 	}
-
 
 	@Transactional
 	@Override
@@ -73,30 +69,31 @@ public class TransactionDaoCustomImp implements TransactionDaoCustom {
 		NetBankingAccount netBanking = (NetBankingAccount) qry.getSingleResult();
 		String transactionPassword = netBanking.getTransactionPassword();
 		return transactionPassword;
-		
-	}
 
+	}
 
 	@Override
 	@Transactional
-	public Double updateBalance(Long accountNumber) {
+	public String updateBalance(Long accountNumber) throws HrException {
 		Query query = em.createQuery("Select t from Transaction t where t.fromAccount=:accNo");
 		Query query1 = em.createQuery("Select a from Account a where a.accountNumber=:accNo");
-		query.setParameter("accNo",accountNumber);
-		query1.setParameter("accNo",accountNumber);
+		query.setParameter("accNo", accountNumber);
+		query1.setParameter("accNo", accountNumber);
 		Transaction tempTrans = (Transaction) query.getSingleResult();
 		Account tempAccount = (Account) query1.getSingleResult();
+
 		Double balance = tempAccount.getBalance();
-		System.out.println(balance);
 		Double transAmount = tempTrans.getTransactionAmount();
-		System.out.println(transAmount);
-		Double updatedBalance = balance-transAmount;
-		System.out.println(updatedBalance);
-		tempAccount.setBalance(updatedBalance);
-		tempTrans.setStatus("Successfull");
-		Double finalBalance =tempAccount.getBalance();
-		System.out.println(finalBalance);
-		return finalBalance;
+		if (balance < 10000 || transAmount > balance) {
+			throw new HrException();
+		} else {
+			Double updatedBalance = balance - transAmount;
+			tempAccount.setBalance(updatedBalance);
+			tempTrans.setStatus("Successfull");
+			Double finalBalance = tempAccount.getBalance();
+			System.out.println(finalBalance);
+			return "Transaction Successful";
+		}
 	}
 
 }

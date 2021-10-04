@@ -71,10 +71,27 @@ public class TransactionDaoCustomImp implements TransactionDaoCustom {
 		return transactionPassword;
 
 	}
+	@Transactional
+	@Override
+	public Account getAccountBalance(Long accountNumber) {
+		Query qry = em.createQuery("Select a from Account a where a.accountNumber=:accountNumber");
+		qry.setParameter("accountNumber", accountNumber);
+		Account tempAccount = (Account) qry.getSingleResult();
+		return tempAccount;
+	}
+
+	@Transactional
+	@Override
+	public Transaction getTransactionAmount(Long fromAccount) {
+		Query qry = em.createQuery("Select t from Transaction t where t.fromAccount=:fromAccount");
+		qry.setParameter("fromAccount", fromAccount);
+		Transaction tempTrans = (Transaction) qry.getSingleResult();
+		return tempTrans;	
+	}
 
 	@Override
 	@Transactional
-	public String updateBalance(Long accountNumber) throws HrException {
+	public Account updateBalance(Long accountNumber) {
 		Query query = em.createQuery("Select t from Transaction t where t.fromAccount=:accNo");
 		Query query1 = em.createQuery("Select a from Account a where a.accountNumber=:accNo");
 		query.setParameter("accNo", accountNumber);
@@ -84,16 +101,18 @@ public class TransactionDaoCustomImp implements TransactionDaoCustom {
 
 		Double balance = tempAccount.getBalance();
 		Double transAmount = tempTrans.getTransactionAmount();
-		if (balance < 10000 || transAmount > balance) {
-			throw new HrException();
-		} else {
+		//if (balance < 10000 || transAmount > balance) {
+			//System.out.println("Insufficient Balance");
+		//} else {
 			Double updatedBalance = balance - transAmount;
 			tempAccount.setBalance(updatedBalance);
 			tempTrans.setStatus("Successfull");
 			Double finalBalance = tempAccount.getBalance();
 			System.out.println(finalBalance);
-			return "Transaction Successful";
-		}
+			return tempAccount;
 	}
+
+
+	
 
 }

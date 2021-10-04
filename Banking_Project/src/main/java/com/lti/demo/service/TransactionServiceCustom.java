@@ -13,5 +13,9 @@ public interface TransactionServiceCustom {
 	
 	public abstract String getTransactionPassword(Long netbankingUserId);
 	
-	public  abstract String updateBalance(Long accountNumber);
+	public abstract Account getAccountBalance(Long accountNumber);
+	
+	public  abstract Account updateBalance(Long accountNumber);
+	
+	public abstract Transaction getTransactionAmount(Long fromAccount);
 }

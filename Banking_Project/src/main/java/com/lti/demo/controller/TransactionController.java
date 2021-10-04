@@ -3,6 +3,7 @@ package com.lti.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,8 +84,22 @@ public class TransactionController {
 	@CrossOrigin("*")
 	@RequestMapping(value ="/updateBalance/{fromAccount}")
 	@GetMapping
-	public String updateBalance(@PathVariable("fromAccount")Long accountNumber) {
+	public Account updateBalance(@PathVariable("fromAccount")Long accountNumber) {
 		return transactionServiceCustom.updateBalance(accountNumber);
+	}
+	
+	@CrossOrigin("*")
+	@RequestMapping(value ="/getBalance/{fromAccount}")
+	@GetMapping
+	public Account getAccountBalance(@PathVariable("fromAccount")Long accountNumber) {
+		return transactionServiceCustom.getAccountBalance(accountNumber);
+	}
+	
+	@CrossOrigin("*")
+	@RequestMapping(value ="/getTransactionAmount/{fromAccount}")
+	@GetMapping
+	public Transaction getTransactionAmount(@PathVariable("fromAccount") Long fromAccount) {
+		return transactionServiceCustom.getTransactionAmount(fromAccount);
 	}
 	
 }

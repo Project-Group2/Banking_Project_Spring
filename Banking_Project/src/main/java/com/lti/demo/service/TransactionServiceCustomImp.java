@@ -39,16 +39,19 @@ public class TransactionServiceCustomImp implements TransactionServiceCustom{
 	}
 
 	@Override
-	public String updateBalance(Long accountNumber)  {
-		String message;
-		try {
-	   return transactionDaoCustom.updateBalance(accountNumber);
+	public Account getAccountBalance(Long accountNumber) {
+		return transactionDaoCustom.getAccountBalance(accountNumber);
 	}
-		 catch (HrException e) {
-				// TODO Auto-generated catch block
-				 message="Insufficient Balance or Transaction Amount is greater than balance";
-			}
+
+	@Override
+	public Account updateBalance(Long accountNumber) {
+		
+		return transactionDaoCustom.updateBalance(accountNumber);
+	}
+
+	@Override
+	public Transaction getTransactionAmount(Long fromAccount) {
 	
-return message;
+		return transactionDaoCustom.getTransactionAmount(fromAccount);
 	}
 }
